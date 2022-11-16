@@ -1,4 +1,4 @@
 {"@type":"Weapon","name":"Sword","description":"A long piece of metal","price":6.89,"qty":0}
-{"@type":"Weapon","name":"Shield","description":"A long protective barrier","price":3.45,"qty":2}
-{"@type":"Armor","name":"Suit","description":"A full body protective gear","price":1.54,"qty":2}
+{"@type":"Weapon","name":"Shield","description":"A long protective barrier","price":3.45,"qty":0}
+{"@type":"Armor","name":"Suit","description":"A full body protective gear","price":1.54,"qty":0}
 {"@type":"Health","name":"Health","description":"Heals you to 100%","price":2.34,"qty":0,"potentcy":0}
