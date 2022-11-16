@@ -1,7 +1,7 @@
 /*
  * Caleb Wolin 
  * CST-239
- * Milestone 2
+ * Milestone 5
  */
 package app;
 
@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,18 +31,11 @@ public class StoreFront
 	 */
 	public static void main(String[] args) 
 	{
-		
-//		saveToFile("test.txt", new Weapon("Sword", "A long piece of metal", 6.89f, 0), true);
-//		saveToFile("test.txt", new Weapon("Shield", "A long protective barrier", 3.45f, 0), true);
-//		saveToFile("test.txt", new Armor("Suit", "A full body protective gear", 1.54f, 0), true);
-//		saveToFile("test.txt", new Health("Health", "Heals you to 100%", 2.34f, 0, 0), true);
-		
-		
 		Scanner s = new Scanner(System.in);
-		
 		
 		// game loop
 		int loop = 0;
+		sortInventory();
 		printInventory(store.inventory.getInventory(), store.shoppingCart.getShoppingCart());
 		while(loop != 4)
 		{
@@ -68,6 +62,7 @@ public class StoreFront
 					purchaseItems(result3);
 					break;
 			}
+			sortInventory();
 			printInventory(store.inventory.getInventory(), store.shoppingCart.getShoppingCart());
 			System.out.println();
 		}
@@ -76,6 +71,26 @@ public class StoreFront
 		saveInventoryToFile("test.txt", store.inventory.getInventory());
 		
 	}
+	
+	
+	private static void sortInventory()
+	{
+		// sort by alphabetical order
+		Collections.sort(store.inventory.getInventory(), (o1, o2) -> {
+			return o1.getName().compareTo(o2.getName());
+		});
+		Collections.sort(store.shoppingCart.getShoppingCart(), (o1, o2) -> {
+			return o1.getName().compareTo(o2.getName());
+		});
+		// sort by price
+		Collections.sort(store.inventory.getInventory(), (o1, o2) -> {
+			return Float.compare(o1.getPrice(), o2.getPrice());
+		});
+		Collections.sort(store.shoppingCart.getShoppingCart(), (o1, o2) -> {
+			return Float.compare(o1.getPrice(), o2.getPrice());
+		});
+	}
+	
 	
 	private static void saveInventoryToFile(String filename, ArrayList<Product> list)
 	{
@@ -242,5 +257,9 @@ public class StoreFront
 		}
 	}
 	
-	
+//	saveToFile("test.txt", new Weapon("Sword", "A long piece of metal", 6.89f, 0), true);
+//	saveToFile("test.txt", new Weapon("Shield", "A long protective barrier", 3.45f, 0), true);
+//	saveToFile("test.txt", new Armor("Suit", "A full body protective gear", 1.54f, 0), true);
+//	saveToFile("test.txt", new Health("Health", "Heals you to 100%", 2.34f, 0, 0), true);
+
 }
